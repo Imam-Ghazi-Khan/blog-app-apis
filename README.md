@@ -23,3 +23,10 @@ delete category:\
 api/categories/{categoryID}
 
 
+Pending:\
+User roles(admin,user)\
+Posts(of type category)\
+Comments (by Users)
+
+
+
