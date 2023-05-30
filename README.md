@@ -3,7 +3,7 @@
  [Base url in about]
 
 Users:\
-get/create users:\
+get or create users:\
 api/users/
 
 get single user:\
@@ -13,7 +13,7 @@ delete user:\
 api/users/{userID}
 
 Categories:\
-create categories:\
+get or create categories:\
 api/categories/
 
 update category:\
