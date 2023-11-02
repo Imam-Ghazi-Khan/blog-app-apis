@@ -3,6 +3,7 @@ package com.igk.blog.services;
 import java.util.List;
 
 import com.igk.blog.payloads.PostDto;
+import com.igk.blog.payloads.PostResponse;
 
 public interface PostService {
     //create
@@ -12,7 +13,7 @@ public interface PostService {
     //delete
     void deletePost(Integer postId);
     //get all posts
-    List<PostDto> getAllPost();
+    PostResponse getAllPost(Integer pageNumber,Integer pageSize,String sortBy,String sortDir);
     //get single post
     PostDto getPostById(Integer postId);
     //get all posts by category

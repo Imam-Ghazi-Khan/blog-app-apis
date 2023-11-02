@@ -29,14 +29,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDto updateUser(UserDto userDto, Integer userId) {
-		User user = this.userRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException("User","user id",userId));
+		User user = this.userRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException("User","user_id",userId));
 		User updatedUser = this.userRepo.save(user);
 		return this.modelMapper.map(updatedUser,UserDto.class);
 	}
 
 	@Override
 	public UserDto getUserById(Integer userId) {
-		User user = this.userRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException("User","user id",userId));
+		User user = this.userRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException("User","user_id",userId));
 		return this.modelMapper.map(user, UserDto.class);
 	}
 
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteUser(Integer userId) {
-		User user = this.userRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException("User","user ID",userId));
+		User user = this.userRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException("User","user_id",userId));
 		this.userRepo.delete(user);
 	}
 

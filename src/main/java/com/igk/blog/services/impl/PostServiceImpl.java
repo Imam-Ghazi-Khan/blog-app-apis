@@ -6,6 +6,10 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.igk.blog.entities.Category;
@@ -13,6 +17,7 @@ import com.igk.blog.entities.Post;
 import com.igk.blog.entities.User;
 import com.igk.blog.exceptions.ResourceNotFoundException;
 import com.igk.blog.payloads.PostDto;
+import com.igk.blog.payloads.PostResponse;
 import com.igk.blog.repositories.CategoryRepo;
 import com.igk.blog.repositories.PostRepo;
 import com.igk.blog.repositories.UserRepo;
@@ -67,10 +72,28 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public List<PostDto> getAllPost() {
-        List<Post> posts = this.postRepo.findAll();
+    public PostResponse getAllPost(Integer pageNumber,Integer  pageSize,String sortBy,String sortDir) {
+
+        Sort sort = null;
+        if(sortDir.equalsIgnoreCase("desc")) sort = Sort.by(sortBy).descending();
+        else sort = Sort.by(sortBy).ascending();
+
+        Pageable p = PageRequest.of(pageNumber, pageSize,sort);
+
+        Page<Post> pagePosts = this.postRepo.findAll(p);
+        List<Post> posts = pagePosts.getContent();
+
         List<PostDto> postDtos = posts.stream().map((post)->this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
-        return postDtos;
+
+        PostResponse postResponse = new PostResponse();
+        postResponse.setContent(postDtos);
+        postResponse.setPageNumber(pagePosts.getNumber());
+        postResponse.setTotalPages(pagePosts.getTotalPages());
+        postResponse.setPageSize(pagePosts.getSize());
+        postResponse.setTotalElements(pagePosts.getTotalElements());
+        postResponse.setLastPage(pagePosts.isLast());
+
+        return postResponse;
     }
 
     @Override
