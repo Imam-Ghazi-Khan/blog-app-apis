@@ -1,7 +1,6 @@
 package com.igk.blog.controllers;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +23,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/categories")
 public class CategoryController{
+
 	@Autowired
 	private CategoryService categoryService;
 	
