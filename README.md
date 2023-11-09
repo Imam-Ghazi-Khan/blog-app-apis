@@ -23,7 +23,7 @@ api/categories/{categoryID}
 
 
 Pending:\
-User roles(admin,user) for API access\
+User roles(admin,user) for API access
 
 
 
